@@ -71,7 +71,7 @@ export const signInUser = (login, password) => {
 
             dispatch({ type: UsersActionTypes.LOGIN_USER_SUCCESS, payload: data.data })
         } catch (err) {
-
+            console.log(err)
         }
     }
 }

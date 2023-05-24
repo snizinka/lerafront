@@ -15,6 +15,7 @@ const Login = () => {
     }
 
     useEffect(() => {
+        console.log(users)
         if (users?.user_id !== undefined) {
             localStorage.setItem('authorizeduser', JSON.stringify(users));
             navigate('/posts')

@@ -19,8 +19,8 @@ export default function postReducer(state = initialState, action) {
 
         case PostActionTypes.CREATE_POST_SUCCESS:
             return {
-                postsList: state.postsList,
-                status: action.payload,
+                postsList: [action.payload.newPost, ...state.postsList],
+                status: action.payload.status,
                 loading: false,
                 error: null
             }
@@ -54,6 +54,41 @@ export default function postReducer(state = initialState, action) {
         case PostActionTypes.LOAD_POSTS_ERROR:
             return {
                 postsList: [],
+                status: 'An error occured',
+                loading: false,
+                error: null
+            }
+
+
+
+        case PostActionTypes.LIKE_POST:
+            return {
+                postsList: state.postsList,
+                status: '',
+                loading: true,
+                error: null
+            }
+
+        case PostActionTypes.LIKE_POST_SUCCESS:
+            return {
+                postsList: state.postsList.map(post => {
+                    if (post.post_id !== action.payload.post) {
+                        return { ...post}
+                    } else {
+                        return {...post, 
+                            likes: action.payload.status === 'Liked' ? post.likes + 1 : post.likes - 1,
+                            didUserLiked: action.payload.status === 'Liked' ? true : false
+                        }
+                    }
+                }),
+                status: '',
+                loading: false,
+                error: null
+            }
+
+        case PostActionTypes.LIKE_POST_ERROR:
+            return {
+                postsList: state.postsList,
                 status: 'An error occured',
                 loading: false,
                 error: null
