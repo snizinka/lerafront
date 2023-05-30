@@ -73,9 +73,10 @@ export default function postReducer(state = initialState, action) {
             return {
                 postsList: state.postsList.map(post => {
                     if (post.post_id !== action.payload.post) {
-                        return { ...post}
+                        return { ...post }
                     } else {
-                        return {...post, 
+                        return {
+                            ...post,
                             likes: action.payload.status === 'Liked' ? post.likes + 1 : post.likes - 1,
                             didUserLiked: action.payload.status === 'Liked' ? true : false
                         }
@@ -93,6 +94,32 @@ export default function postReducer(state = initialState, action) {
                 loading: false,
                 error: null
             }
+
+
+        case PostActionTypes.LOAD_EDIT_POST:
+            return {
+                postsList: { },
+                status: 'Loading ...',
+                loading: true,
+                error: null
+            }
+
+        case PostActionTypes.LOAD_EDIT_POST_SUCCESS:
+            return {
+                postsList: action.payload,
+                status: 'Finished',
+                loading: false,
+                error: null
+            }
+
+        case PostActionTypes.LOAD_EDIT_POST_ERROR:
+            return {
+                postsList: state.postsList,
+                status: [],
+                loading: false,
+                error: null
+            }
+
 
         default:
             return state

@@ -1,6 +1,6 @@
 import { PostActionTypes } from "../../types/posts";
 
-export const createPost = (title, bodyText, picture, userId) => {
+export const createPost = (title, bodyText, picture, userId, postImages) => {
     return async (dispatch) => {
         try {
             dispatch({ type: PostActionTypes.CREATE_POST })
@@ -15,13 +15,39 @@ export const createPost = (title, bodyText, picture, userId) => {
                     title: title,
                     bodyText: bodyText,
                     picture: picture,
-                    userId: userId
+                    userId: userId,
+                    postImages: postImages
                 })
             }).then(res => res.json());
 
             console.log(data)
 
             dispatch({ type: PostActionTypes.CREATE_POST_SUCCESS, payload: data.data })
+        } catch (err) {
+
+        }
+    }
+}
+
+export const loadPostById = (postId) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: PostActionTypes.LOAD_EDIT_POST })
+
+            const data = await fetch('http://localhost:7000/loadeditpost', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    postId: postId
+                })
+            }).then(res => res.json());
+
+            console.log(data)
+
+            dispatch({ type: PostActionTypes.LOAD_EDIT_POST_SUCCESS, payload: data.data })
         } catch (err) {
 
         }

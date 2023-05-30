@@ -3,6 +3,10 @@ export const PostActionTypes = {
     CREATE_POST_SUCCESS: 'CREATE_POST_SUCCESS',
     CREATE_POST_ERROR: 'FETCH_USERS_ERROR',
 
+    LOAD_EDIT_POST: 'LOAD_EDIT_POST',
+    LOAD_EDIT_POST_SUCCESS: 'LOAD_EDIT_POST_SUCCESS',
+    LOAD_EDIT_POST_ERROR: 'LOAD_EDIT_POST_ERROR',
+
     LOAD_POSTS: 'LOAD_POSTS',
     LOAD_POSTS_SUCCESS: 'LOAD_POSTS_SUCCESS',
     LOAD_POSTS_ERROR: 'LOAD_POSTS_ERROR',
@@ -24,6 +28,20 @@ const CreatePostSuccessAction = {
 const CreatePostErrorAction = {
     type: PostActionTypes.CREATE_POST_ERROR,
     payload: []
+}
+
+const LoadEditPostAction = {
+    type: PostActionTypes.LOAD_EDIT_POST
+}
+
+const LoadEditPostSuccessAction = {
+    type: PostActionTypes.LOAD_EDIT_POST_SUCCESS,
+    payload: {}
+}
+
+const LoadEditPostErrorAction = {
+    type: PostActionTypes.LOAD_EDIT_POST_ERROR,
+    payload: {}
 }
 
 
@@ -56,5 +74,6 @@ const LikePostErrorAction = {
 }
 
 export const PostsAction = CreatePostAction | CreatePostSuccessAction | CreatePostErrorAction
-| LoadPostAction | LoadPostSuccessAction | LoadPostErrorAction
-| LikePostAction | LikePostSuccessAction | LikePostErrorAction
+    | LoadPostAction | LoadPostSuccessAction | LoadPostErrorAction
+    | LikePostAction | LikePostSuccessAction | LikePostErrorAction
+    | LoadEditPostAction | LoadEditPostSuccessAction | LoadEditPostErrorAction
