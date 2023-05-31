@@ -84,6 +84,31 @@ export default function usersReducer(state = initialState, action) {
                 error: 'Stalasia pomilka'
             }
 
+
+        case UsersActionTypes.CONFIRM_CODE:
+            return {
+                validationStatus: true,
+                users: {},
+                loading: true,
+                error: null
+            }
+
+        case UsersActionTypes.CONFIRM_CODE_SUCCESS:
+            return {
+                validationStatus: action.payload,
+                users: {},
+                loading: false,
+                error: null
+            }
+
+        case UsersActionTypes.CONFIRM_CODE_ERROR:
+            return {
+                validationStatus: false,
+                users: {},
+                loading: false,
+                error: 'Stalasia pomilka'
+            }
+
         case UsersActionTypes.SIGNOUT_USER:
             return {
                 validationStatus: true,

@@ -11,7 +11,11 @@ export const UsersActionTypes = {
     LOGIN_USER_SUCCESS: 'LOGIN_USER_SUCCESS',
     LOGIN_USER_ERROR: 'LOGIN_USER_ERROR',
 
-    SIGNOUT_USER: 'SIGNOUT_USER'
+    SIGNOUT_USER: 'SIGNOUT_USER',
+
+    CONFIRM_CODE: 'CONFIRM_CODE',
+    CONFIRM_CODE_SUCCESS: 'CONFIRM_CODE_SUCCESS',
+    CONFIRM_CODE_ERROR: 'CONFIRM_CODE_ERROR',
 }
 
 const FetchUsersAction = {
@@ -58,6 +62,20 @@ const LoginUsersErrorAction = {
     payload: []
 }
 
+const ConfirmCodeAction = {
+    type: UsersActionTypes.CONFIRM_CODE
+}
+
+const ConfirmCodeSuccessAction = {
+    type: UsersActionTypes.CONFIRM_CODE_SUCCESS,
+    payload: []
+};
+
+const ConfirmCodeErrorAction = {
+    type: UsersActionTypes.CONFIRM_CODE_ERROR,
+    payload: []
+}
+
 const SignOutUserAction = {
     type: UsersActionTypes.SIGNOUT_USER,
 }
@@ -66,3 +84,4 @@ export const UsersAction = FetchUsersAction | FetchUsersSuccessAction | FetchUse
 | SignUpUsersAction | SignUpUsersSuccessAction | SignUpUsersErrorAction 
 | LoginUsersAction | LoginUsersSuccessAction | LoginUsersErrorAction
 | SignOutUserAction
+| ConfirmCodeAction | ConfirmCodeSuccessAction | ConfirmCodeErrorAction

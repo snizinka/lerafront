@@ -98,7 +98,7 @@ export default function postReducer(state = initialState, action) {
 
         case PostActionTypes.LOAD_EDIT_POST:
             return {
-                postsList: { },
+                postsList: {},
                 status: 'Loading ...',
                 loading: true,
                 error: null
@@ -113,6 +113,30 @@ export default function postReducer(state = initialState, action) {
             }
 
         case PostActionTypes.LOAD_EDIT_POST_ERROR:
+            return {
+                postsList: state.postsList,
+                status: [],
+                loading: false,
+                error: null
+            }
+
+        case PostActionTypes.EDIT_POST:
+            return {
+                postsList: state.postsList,
+                status: 'Loading ...',
+                loading: true,
+                error: null
+            }
+
+        case PostActionTypes.EDIT_POST_SUCCESS:
+            return {
+                postsList: action.payload,
+                status: 'Finished',
+                loading: false,
+                error: null
+            }
+
+        case PostActionTypes.EDIT_POST_ERROR:
             return {
                 postsList: state.postsList,
                 status: [],

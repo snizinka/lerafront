@@ -29,6 +29,36 @@ export const createPost = (title, bodyText, picture, userId, postImages) => {
     }
 }
 
+export const editPost = (postId, title, bodyText, picture, postImages, newPostImages) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: PostActionTypes.EDIT_POST })
+
+            const data = await fetch('http://localhost:7000/editpost', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    postId: postId,
+                    title: title,
+                    bodyText: bodyText,
+                    picture: picture,
+                    postImages: postImages,
+                    newPostImages: newPostImages
+                })
+            }).then(res => res.json());
+
+            console.log(data)
+
+            dispatch({ type: PostActionTypes.EDIT_POST_SUCCESS, payload: data.data })
+        } catch (err) {
+
+        }
+    }
+}
+
 export const loadPostById = (postId) => {
     return async (dispatch) => {
         try {

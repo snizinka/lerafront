@@ -7,6 +7,7 @@ import SignUp from './components/SignUp';
 import { useTypedSelector } from './hooks/useTypedSelector';
 import CreatePost from './components/CreatePost';
 import EditPost from './components/EditPost';
+import ConfrimCode from './components/ConfrimCode';
 
 function App() {
   const { users } = useTypedSelector(i => i.users)
@@ -17,6 +18,7 @@ function App() {
           <Route path='/' element={
             users?.user_id !== undefined ? <Posts /> : <Login />
           }></Route>
+          <Route path='/confirmation' element={<ConfrimCode />}></Route>
           <Route path='/posts' element={<CreatePost />}></Route>
           <Route path='/editpost/:id' element={<EditPost />}></Route>
           <Route path='/signup' element={<SignUp />}></Route>

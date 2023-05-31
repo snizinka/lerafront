@@ -76,6 +76,30 @@ export const signInUser = (login, password) => {
     }
 }
 
+export const checkConfirmationCode = (code) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: UsersActionTypes.CONFIRM_CODE })
+            const data = await fetch('http://localhost:7000/confirmregistration', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    code: code
+                })
+            }).then(res => res.json());
+
+            console.log(data)
+
+            dispatch({ type: UsersActionTypes.CONFIRM_CODE_SUCCESS, payload: data.data })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
 
 export const signOut = () => {
     return async (dispatch) => {

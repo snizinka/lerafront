@@ -7,6 +7,10 @@ export const PostActionTypes = {
     LOAD_EDIT_POST_SUCCESS: 'LOAD_EDIT_POST_SUCCESS',
     LOAD_EDIT_POST_ERROR: 'LOAD_EDIT_POST_ERROR',
 
+    EDIT_POST: 'EDIT_POST',
+    EDIT_POST_SUCCESS: 'EDIT_POST_SUCCESS',
+    EDIT_POST_ERROR: 'EDIT_POST_ERROR',
+
     LOAD_POSTS: 'LOAD_POSTS',
     LOAD_POSTS_SUCCESS: 'LOAD_POSTS_SUCCESS',
     LOAD_POSTS_ERROR: 'LOAD_POSTS_ERROR',
@@ -44,6 +48,20 @@ const LoadEditPostErrorAction = {
     payload: {}
 }
 
+const EditPostAction = {
+    type: PostActionTypes.EDIT_POST
+}
+
+const EditPostSuccessAction = {
+    type: PostActionTypes.EDIT_POST_SUCCESS,
+    payload: {}
+}
+
+const EditPostErrorAction = {
+    type: PostActionTypes.EDIT_POST_ERROR,
+    payload: {}
+}
+
 
 const LoadPostAction = {
     type: PostActionTypes.CREATE_POST
@@ -77,3 +95,4 @@ export const PostsAction = CreatePostAction | CreatePostSuccessAction | CreatePo
     | LoadPostAction | LoadPostSuccessAction | LoadPostErrorAction
     | LikePostAction | LikePostSuccessAction | LikePostErrorAction
     | LoadEditPostAction | LoadEditPostSuccessAction | LoadEditPostErrorAction
+    | EditPostAction | EditPostSuccessAction | EditPostErrorAction
