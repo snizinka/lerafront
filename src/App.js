@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login';
@@ -8,9 +8,21 @@ import { useTypedSelector } from './hooks/useTypedSelector';
 import CreatePost from './components/CreatePost';
 import EditPost from './components/EditPost';
 import ConfrimCode from './components/ConfrimCode';
+import Chat from './components/Chat';
+import io from 'socket.io-client';
 
 function App() {
+  const [socket, setSocket] = useState()
   const { users } = useTypedSelector(i => i.users)
+
+  useEffect(() => {
+    const connection = io('http://localhost:7000')
+    connection?.emit('join-chat', {
+      userId: users.user_id
+    })
+    setSocket(connection)
+  }, [])
+
   return (
     <div className="App">
       <Router>
@@ -23,6 +35,8 @@ function App() {
           <Route path='/editpost/:id' element={<EditPost />}></Route>
           <Route path='/signup' element={<SignUp />}></Route>
           <Route path='/login' element={<Login />}></Route>
+          <Route path='/chat' element={<Chat socket={socket} />}></Route>
+          <Route path='/chat/:id' element={<Chat socket={socket} />}></Route>
         </Routes>
       </Router>
     </div>
