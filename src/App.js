@@ -10,6 +10,7 @@ import EditPost from './components/EditPost';
 import ConfrimCode from './components/ConfrimCode';
 import Chat from './components/Chat';
 import io from 'socket.io-client';
+import EditProfile from './components/EditProfile';
 
 function App() {
   const [socket, setSocket] = useState()
@@ -37,6 +38,7 @@ function App() {
           <Route path='/login' element={<Login />}></Route>
           <Route path='/chat' element={<Chat socket={socket} />}></Route>
           <Route path='/chat/:id' element={<Chat socket={socket} />}></Route>
+          <Route path='/editprofile' element={<EditProfile />}></Route>
         </Routes>
       </Router>
     </div>
