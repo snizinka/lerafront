@@ -71,7 +71,7 @@ export default function usersReducer(state = initialState, action) {
         case UsersActionTypes.LOGIN_USER_SUCCESS:
             return {
                 validationStatus: action.payload.validationStatus,
-                users: action.payload.user[0],
+                users: action.payload.user,
                 loading: false,
                 error: null
             }

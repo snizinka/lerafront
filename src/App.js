@@ -11,6 +11,8 @@ import ConfrimCode from './components/ConfrimCode';
 import Chat from './components/Chat';
 import io from 'socket.io-client';
 import EditProfile from './components/EditProfile';
+import Community from './components/Community';
+import CreateCommunity from './components/CreateCommunity';
 
 function App() {
   const [socket, setSocket] = useState()
@@ -39,6 +41,8 @@ function App() {
           <Route path='/chat' element={<Chat socket={socket} />}></Route>
           <Route path='/chat/:id' element={<Chat socket={socket} />}></Route>
           <Route path='/editprofile' element={<EditProfile />}></Route>
+          <Route path='/community/:id' element={<Community />}></Route>
+          <Route path='/createcommunity' element={<CreateCommunity />}></Route>
         </Routes>
       </Router>
     </div>
