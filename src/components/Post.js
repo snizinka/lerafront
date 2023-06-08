@@ -30,6 +30,6 @@ const Post = ({ post_id, title, body, likes, preview, didUserLiked, loadImageIfE
       >{didUserLiked ? 'Unlike' : 'Like'}</button>
     </div>
   )
-};
+}
 
 export default Post;

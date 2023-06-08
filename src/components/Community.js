@@ -9,7 +9,7 @@ const Community = () => {
     const communityId = useParams()
     const refInput = useRef() // document.getElementById('...')
     const { postsList, communityDetails } = useTypedSelector(state => state.post)
-    const { createCommunityPost, loadAllCommunityPosts, loadCommunity } = usePostActions()
+    const { createCommunityPost, loadAllCommunityPosts, loadCommunity, followCommunity } = usePostActions()
     const { users } = useTypedSelector(state => state.users)
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
@@ -20,7 +20,7 @@ const Community = () => {
 
     useEffect(() => {
         if (communityId.id !== undefined) {
-            loadCommunity(communityId.id)
+            loadCommunity(communityId.id, users.user_id)
             loadAllCommunityPosts(communityId.id, users.user_id)
         }
     }, [communityId])
@@ -103,6 +103,7 @@ const Community = () => {
                     {loadImageIfExists(communityDetails?.image)}
                     <h2>{communityDetails?.community_name}</h2>
                     <h3>Description: {communityDetails?.description}</h3>
+                    <button onClick={() => followCommunity(users.user_id, communityDetails.id)}>{communityDetails?.isFollowing === true ? 'Unfollow' : 'Follow'}</button>
                 </div>
             </div>
             {

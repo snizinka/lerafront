@@ -87,6 +87,32 @@ export default function profileReducer(state = initialState, action) {
 
 
 
+        case ProfileActionTypes.FOLLOW_USER:
+            return {
+                validationStatus: state.validationStatus,
+                profile: state.profile,
+                loading: true,
+                error: null
+            }
+
+        case ProfileActionTypes.FOLLOW_USER_SUCCESS:
+            return {
+                validationStatus: state.validationStatus,
+                profile: { ...state.profile, isFollowing: action.payload },
+                loading: false,
+                error: null
+            }
+
+        case ProfileActionTypes.FOLLOW_USER_ERROR:
+            return {
+                validationStatus: state.validationStatus,
+                profile: {},
+                loading: false,
+                error: null
+            }
+
+
+
         default:
             return state
     }

@@ -100,6 +100,66 @@ export default function postReducer(state = initialState, action) {
 
 
 
+        case PostActionTypes.SEARCH_FOR_COMMUNITIES:
+            return {
+                communityDetails: [],
+                postsList: [],
+                status: 'Processing',
+                loading: true,
+                error: null
+            }
+
+        case PostActionTypes.SEARCH_FOR_COMMUNITIES_SUCCESS:
+            return {
+                communityDetails: action.payload, // [communities]
+                postsList: [],
+                status: 'Found',
+                loading: false,
+                error: null
+            }
+
+        case PostActionTypes.SEARCH_FOR_COMMUNITIES_ERROR:
+            return {
+                communityDetails: state.communityDetails,
+                postsList: state.postsList,
+                status: [],
+                loading: false,
+                error: null
+            }
+
+
+
+
+
+        case PostActionTypes.FOLLOW_COMMUNITY:
+            return {
+                communityDetails: state.communityDetails,
+                postsList: state.postsList,
+                status: 'Processing',
+                loading: true,
+                error: null
+            }
+
+        case PostActionTypes.FOLLOW_COMMUNITY_SUCCESS:
+            return {
+                communityDetails: { ...state.communityDetails, isFollowing: action.payload },
+                postsList: state.postsList,
+                status: 'Succeeded',
+                loading: false,
+                error: null
+            }
+
+        case PostActionTypes.FOLLOW_COMMUNITY_ERROR:
+            return {
+                communityDetails: state.communityDetails,
+                postsList: state.postsList,
+                status: [],
+                loading: false,
+                error: null
+            }
+
+
+
 
         case PostActionTypes.LOAD_POSTS:
             return {

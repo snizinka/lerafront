@@ -13,6 +13,9 @@ import io from 'socket.io-client';
 import EditProfile from './components/EditProfile';
 import Community from './components/Community';
 import CreateCommunity from './components/CreateCommunity';
+import CommunityList from './components/CommunityList';
+import SearchForUsers from './components/SearchForUsers';
+import Profile from './components/Profile';
 
 function App() {
   const [socket, setSocket] = useState()
@@ -43,6 +46,9 @@ function App() {
           <Route path='/editprofile' element={<EditProfile />}></Route>
           <Route path='/community/:id' element={<Community />}></Route>
           <Route path='/createcommunity' element={<CreateCommunity />}></Route>
+          <Route path='/communities' element={<CommunityList />}></Route>
+          <Route path='/findusers' element={<SearchForUsers />}></Route>
+          <Route path='/profile/:id' element={<Profile />}></Route>
         </Routes>
       </Router>
     </div>

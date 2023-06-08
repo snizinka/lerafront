@@ -193,7 +193,7 @@ export const loadAllCommunityPosts = (communityId, userId) => {
 }
 
 
-export const loadCommunity = (communityId) => {
+export const loadCommunity = (communityId, userId) => {
     return async (dispatch) => {
         try {
             dispatch({ type: PostActionTypes.LOAD_COMMUNITY })
@@ -205,7 +205,8 @@ export const loadCommunity = (communityId) => {
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify({
-                    communityId: communityId
+                    communityId: communityId,
+                    userId: userId
                 })
             }).then(res => res.json());
 
@@ -241,6 +242,57 @@ export const createCommunity = (title, details, picture, userId) => {
             console.log(data)
 
             dispatch({ type: PostActionTypes.CREATE_COMMUNITY_SUCCESS, payload: data.data })
+        } catch (err) {
+
+        }
+    }
+}
+
+export const searchForCommunities = (title) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: PostActionTypes.SEARCH_FOR_COMMUNITIES })
+
+            const data = await fetch('http://localhost:7000/communitysearch', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    title
+                })
+            }).then(res => res.json())
+
+            console.log(data)
+
+            dispatch({ type: PostActionTypes.SEARCH_FOR_COMMUNITIES_SUCCESS, payload: data.data })
+        } catch (err) {
+
+        }
+    }
+}
+
+export const followCommunity = (userId, communityId) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: PostActionTypes.FOLLOW_COMMUNITY })
+
+            const data = await fetch('http://localhost:7000/followcommunity', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    userId,
+                    communityId
+                })
+            }).then(res => res.json())
+
+            console.log(data)
+
+            dispatch({ type: PostActionTypes.FOLLOW_COMMUNITY_SUCCESS, payload: data.data })
         } catch (err) {
 
         }

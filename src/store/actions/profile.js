@@ -1,6 +1,6 @@
 import { ProfileActionTypes } from "../../types/profile";
 
-export const getProfile = (userId) => {
+export const getProfile = (userId, watcherId, needDetails) => {
     return async (dispatch) => {
         try {
             dispatch({ type: ProfileActionTypes.FETCH_USER })
@@ -11,7 +11,9 @@ export const getProfile = (userId) => {
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify({
-                    userId: userId
+                    userId: userId,
+                    watcherId: watcherId,
+                    needDetails: needDetails
                 })
             }).then(res => res.json())
 
@@ -74,6 +76,31 @@ export const confirmCode = (userId, code, email, password, image) => {
             console.log(data)
 
             dispatch({ type: ProfileActionTypes.CONFIRM_CODE_SUCCESS, payload: data.data })
+        } catch (err) {
+
+        }
+    }
+}
+
+export const followUser = (userId, followerId) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: ProfileActionTypes.FOLLOW_USER })
+            const data = await fetch('http://localhost:7000/followuser', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    userId,
+                    followerId
+                })
+            }).then(res => res.json())
+
+            console.log(data)
+
+            dispatch({ type: ProfileActionTypes.FOLLOW_USER_SUCCESS, payload: data.data })
         } catch (err) {
 
         }

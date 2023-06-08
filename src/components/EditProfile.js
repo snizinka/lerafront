@@ -21,7 +21,7 @@ const EditProfile = () => {
 
     useEffect(() => {
         if (users.user_id !== undefined) {
-            getProfile(users.user_id)
+            getProfile(users.user_id, users.user_id, false)
         }
     }, [])
 

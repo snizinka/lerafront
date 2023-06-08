@@ -16,6 +16,10 @@ export const UsersActionTypes = {
     CONFIRM_CODE: 'CONFIRM_CODE',
     CONFIRM_CODE_SUCCESS: 'CONFIRM_CODE_SUCCESS',
     CONFIRM_CODE_ERROR: 'CONFIRM_CODE_ERROR',
+
+    SEARCH_FOR_USERS: 'SEARCH_FOR_USERS',
+    SEARCH_FOR_USERS_SUCCESS: 'SEARCH_FOR_USERS_SUCCESS',
+    SEARCH_FOR_USERS_ERROR: 'SEARCH_FOR_USERS_ERROR',
 }
 
 const FetchUsersAction = {
@@ -80,8 +84,25 @@ const SignOutUserAction = {
     type: UsersActionTypes.SIGNOUT_USER,
 }
 
+
+const SearchForUsersAction = {
+    type: UsersActionTypes.SEARCH_FOR_USERS
+}
+
+const SearchForUsersSuccessAction = {
+    type: UsersActionTypes.SEARCH_FOR_USERS_SUCCESS,
+    payload: []
+}
+
+const SearchForUsersErrorAction = {
+    type: UsersActionTypes.SEARCH_FOR_USERS_ERROR,
+    payload: []
+}
+
+
 export const UsersAction = FetchUsersAction | FetchUsersSuccessAction | FetchUsersErrorAction
 | SignUpUsersAction | SignUpUsersSuccessAction | SignUpUsersErrorAction 
 | LoginUsersAction | LoginUsersSuccessAction | LoginUsersErrorAction
 | SignOutUserAction
 | ConfirmCodeAction | ConfirmCodeSuccessAction | ConfirmCodeErrorAction
+| SearchForUsersAction | SearchForUsersSuccessAction | SearchForUsersErrorAction

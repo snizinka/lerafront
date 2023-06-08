@@ -34,6 +34,14 @@ export const PostActionTypes = {
     LIKE_POST: 'LIKE_POST',
     LIKE_POST_SUCCESS: 'LIKE_POST_SUCCESS',
     LIKE_POST_ERROR: 'LIKE_POST_ERROR',
+
+    SEARCH_FOR_COMMUNITIES: 'SEARCH_FOR_COMMUNITIES',
+    SEARCH_FOR_COMMUNITIES_SUCCESS: 'SEARCH_FOR_COMMUNITIES_SUCCESS',
+    SEARCH_FOR_COMMUNITIES_ERROR: 'SEARCH_FOR_COMMUNITIES_ERROR',
+
+    FOLLOW_COMMUNITY: 'FOLLOW_COMMUNITY',
+    FOLLOW_COMMUNITY_SUCCESS: 'FOLLOW_COMMUNITY_SUCCESS',
+    FOLLOW_COMMUNITY_ERROR: 'FOLLOW_COMMUNITY_ERROR'
 }
 
 const CreatePostAction = {
@@ -171,6 +179,38 @@ const CreateCommunitErrorAction = {
 }
 
 
+
+const SearchForCommunityAction = {
+    type: PostActionTypes.SEARCH_FOR_COMMUNITIES
+}
+
+const SearchForCommunitSuccessAction = {
+    type: PostActionTypes.SEARCH_FOR_COMMUNITIES_SUCCESS,
+    payload: []
+}
+
+const SearchForCommunitErrorAction = {
+    type: PostActionTypes.SEARCH_FOR_COMMUNITIES_ERROR,
+    payload: []
+}
+
+
+
+const FollowCommunityAction = {
+    type: PostActionTypes.FOLLOW_COMMUNITY
+}
+
+const FollowCommunitSuccessAction = {
+    type: PostActionTypes.FOLLOW_COMMUNITY_SUCCESS,
+    payload: []
+}
+
+const FollowCommunitErrorAction = {
+    type: PostActionTypes.FOLLOW_COMMUNITY_ERROR,
+    payload: []
+}
+
+
 export const PostsAction = CreatePostAction | CreatePostSuccessAction | CreatePostErrorAction
     | LoadPostAction | LoadPostSuccessAction | LoadPostErrorAction
     | LikePostAction | LikePostSuccessAction | LikePostErrorAction
@@ -180,3 +220,5 @@ export const PostsAction = CreatePostAction | CreatePostSuccessAction | CreatePo
     | LoadCommunityPostAction | LoadCommunityPostSuccessAction | LoadCommunityPostErrorAction
     | LoadCommunityAction | LoadCommunitySuccessAction | LoadCommunityErrorAction
     | CreateCommunityAction | CreateCommunitSuccessAction | CreateCommunitErrorAction
+    | SearchForCommunityAction | SearchForCommunitSuccessAction | SearchForCommunitErrorAction
+    | FollowCommunityAction | FollowCommunitSuccessAction | FollowCommunitErrorAction
