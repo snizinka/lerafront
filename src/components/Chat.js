@@ -8,10 +8,11 @@ import Message from "./Message"
 const Chat = ({ socket }) => {
     const navigate = useNavigate()
     const chatId = useParams()
+    const [chatStatus, setChatStatus] = useState(undefined)
     const [message, setMessage] = useState('')
     const { users } = useTypedSelector(state => state.users)
     const { chats, messages, currentChatData } = useTypedSelector(state => state.chat)
-    const { getPrivateChats, getPrivateChatMessages, getChatDetails, receivedMessage } = useChatActions()
+    const { getPrivateChats, getPrivateChatMessages, getChatDetails, receivedMessage, editMessage, deleteMessage } = useChatActions()
 
     useEffect(() => {
         getPrivateChats(users.user_id)
@@ -27,22 +28,61 @@ const Chat = ({ socket }) => {
     useEffect(() => {
         socket?.on('recieve-message', (data) => {
             receivedMessage(data)
-            console.log(data)
+        })
+
+        socket?.on('edited-message', (data) => {
+            editMessage(data.msgId, data.message)
+        })
+
+        socket?.on('removed-message', (data) => {
+            deleteMessage(data)
         })
     }, [socket])
 
+    useEffect(() => {
+        console.log(chatStatus)
+    }, [chatStatus])
+
     function sendMessage() {
         if (Object.keys(currentChatData).length > 0) {
-            const messageToSend = {
-                chatId: chatId.id,
-                userId: users.user_id,
-                receiverID: currentChatData.user_id,
-                message: message,
-                username: users.username
-            }
 
-            socket?.emit('send-message', messageToSend)
+            if (chatStatus !== undefined) {
+                const messageToSend = {
+                    chatId: chatId.id,
+                    userId: users.user_id,
+                    receiverID: currentChatData.user_id,
+                    message: message,
+                    username: users.username,
+                    editedMessageId: chatStatus.id
+                }
+                socket?.emit('edit-message', messageToSend)
+            } else {
+                const messageToSend = {
+                    chatId: chatId.id,
+                    userId: users.user_id,
+                    receiverID: currentChatData.user_id,
+                    message: message,
+                    username: users.username
+                }
+                socket?.emit('send-message', messageToSend)
+            }
         }
+
+        setChatStatus(undefined)
+        setMessage('')
+    }
+
+    function startEditing(id, message) {
+        setChatStatus({ id, message })
+        setMessage(message)
+    }
+
+    function removeMessage(messageId) {
+        socket?.emit('remove-message', {
+            messageId: messageId,
+            userId: users.user_id,
+            receiverID: currentChatData.user_id
+        })
     }
 
     return (
@@ -59,10 +99,14 @@ const Chat = ({ socket }) => {
             <ScrollToBottom>
                 {
                     messages.map(message => {
-                        return <Message key={`message-${message.msgId}`} 
-                        username={message.username}
-                        message={message.message}
-                        created_at={message.created_at} />
+                        return <Message key={`message-${message.msgId}`}
+                            id={message.msgId}
+                            username={message.username}
+                            message={message.message}
+                            created_at={message.created_at}
+                            startEditing={startEditing}
+                            removeMessage={removeMessage}
+                        />
                     })
                 }
             </ScrollToBottom>

@@ -84,3 +84,16 @@ export const receivedMessage = (message) => {
         dispatch({ type: ChatActionTypes.RECEIVED_MESSAGE, payload: message })
     }
 }
+
+
+export const editMessage = (messageId, message) => {
+    return async (dispatch) => {
+        dispatch({ type: ChatActionTypes.EDIT_MESSAGE_SUCCESS, payload: { msgId: messageId, message: message } })
+    }
+}
+
+export const deleteMessage = (messageId) => {
+    return async (dispatch) => {
+        dispatch({ type: ChatActionTypes.DELETE_MESSAGE_SUCCESS, payload: messageId })
+    }
+}

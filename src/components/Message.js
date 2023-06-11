@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-const Message = ({ username, message, created_at }) => {
+const Message = ({ id, username, message, created_at, startEditing, removeMessage }) => {
     const [show, setShow] = useState(false)
     return (
         <div onContextMenu={(e) => {
@@ -15,8 +15,8 @@ const Message = ({ username, message, created_at }) => {
             <h4>{created_at}</h4>
 
             <div style={{ visibility: show ? 'visible' : 'hidden' }}>
-                <button>Edit</button>
-                <button>Delete</button>
+                <button onClick={() => startEditing(id, message)}>Edit</button>
+                <button onClick={() => removeMessage(id)}>Delete</button>
             </div>
         </div>
     )

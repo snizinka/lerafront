@@ -11,6 +11,15 @@ export const ChatActionTypes = {
     GET_CHAT_MESSAGES_SUCCESS: 'GET_CHAT_MESSAGES_SUCCESS',
     GET_CHAT_MESSAGES_ERROR: 'GET_CHAT_MESSAGES_ERROR',
 
+    EDIT_MESSAGE: 'EDIT_MESSAGE',
+    EDIT_MESSAGE_SUCCESS: 'EDIT_MESSAGE_SUCCESS',
+    EDIT_MESSAGE_ERROR: 'EDIT_MESSAGE_ERROR',
+
+
+    DELETE_MESSAGE: 'DELETE_MESSAGE',
+    DELETE_MESSAGE_SUCCESS: 'DELETE_MESSAGE_SUCCESS',
+    DELETE_MESSAGE_ERROR: 'DELETE_MESSAGE_ERROR',
+
     RECEIVED_MESSAGE: 'RECEIVED_MESSAGE'
 }
 
@@ -59,6 +68,38 @@ const GetChatMessagesErrorAction = {
 }
 
 
+const EditMessagesAction = {
+    type: ChatActionTypes.EDIT_MESSAGE
+}
+
+const EditMessagesSuccessAction = {
+    type: ChatActionTypes.EDIT_MESSAGE_SUCCESS,
+    payload: []
+}
+
+const EditMessagesErrorAction = {
+    type: ChatActionTypes.EDIT_MESSAGE_ERROR,
+    payload: []
+}
+
+
+
+const DeleteMessagesAction = {
+    type: ChatActionTypes.DELETE_MESSAGE
+}
+
+const DeleteMessagesSuccessAction = {
+    type: ChatActionTypes.DELETE_MESSAGE_SUCCESS,
+    payload: []
+}
+
+const DeleteMessagesErrorAction = {
+    type: ChatActionTypes.DELETE_MESSAGE_ERROR,
+    payload: []
+}
+
+
+
 const ReceiveMessageAction = {
     type: ChatActionTypes.RECEIVED_MESSAGE,
     payload: []
@@ -68,3 +109,5 @@ export const ChatAction = GetChatsAction | GetChatsSuccessAction | GetChatsError
 | GetChatMessagesAction | GetChatMessagesSuccessAction | GetChatMessagesErrorAction
 | ReceiveMessageAction
 | GetCurrentChatAction | GetCurrentChatSuccessAction | GetCurrentChatErrorAction
+| EditMessagesAction | EditMessagesSuccessAction | EditMessagesErrorAction
+| DeleteMessagesAction | DeleteMessagesSuccessAction | DeleteMessagesErrorAction
