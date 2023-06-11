@@ -16,10 +16,13 @@ import CreateCommunity from './components/CreateCommunity';
 import CommunityList from './components/CommunityList';
 import SearchForUsers from './components/SearchForUsers';
 import Profile from './components/Profile';
+import ModeratorPanel from './components/ModeratorPanel';
+import Report from './components/Report';
 
 function App() {
   const [socket, setSocket] = useState()
   const { users } = useTypedSelector(i => i.users)
+  const { status } = useTypedSelector(state => state.post)
 
   useEffect(() => {
     const connection = io('http://localhost:7000')
@@ -28,6 +31,12 @@ function App() {
     })
     setSocket(connection)
   }, [])
+
+  useEffect(() => {
+    if (status === 'Your report has been sent just now') {
+      alert('Your report has been sent just now')
+    }
+  }, [status])
 
   return (
     <div className="App">
@@ -49,10 +58,12 @@ function App() {
           <Route path='/communities' element={<CommunityList />}></Route>
           <Route path='/findusers' element={<SearchForUsers />}></Route>
           <Route path='/profile/:id' element={<Profile />}></Route>
+          <Route path='/moderatorpanel' element={<ModeratorPanel />}></Route>
+          <Route path='/report/:id' element={<Report />}></Route>
         </Routes>
       </Router>
     </div>
-  );
+  )
 }
 
 export default App;

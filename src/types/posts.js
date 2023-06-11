@@ -41,7 +41,11 @@ export const PostActionTypes = {
 
     FOLLOW_COMMUNITY: 'FOLLOW_COMMUNITY',
     FOLLOW_COMMUNITY_SUCCESS: 'FOLLOW_COMMUNITY_SUCCESS',
-    FOLLOW_COMMUNITY_ERROR: 'FOLLOW_COMMUNITY_ERROR'
+    FOLLOW_COMMUNITY_ERROR: 'FOLLOW_COMMUNITY_ERROR',
+
+    REPORT_ON_POST: 'REPORT_ON_POST',
+    REPORT_ON_POST_SUCCESS: 'REPORT_ON_POST_SUCCESS',
+    REPORT_ON_POST_ERROR: 'REPORT_ON_POST_ERROR',
 }
 
 const CreatePostAction = {
@@ -211,6 +215,22 @@ const FollowCommunitErrorAction = {
 }
 
 
+
+const ReportAction = {
+    type: PostActionTypes.REPORT_ON_POST
+}
+
+const ReportSuccessAction = {
+    type: PostActionTypes.REPORT_ON_POST_SUCCESS,
+    payload: []
+}
+
+const ReportErrorAction = {
+    type: PostActionTypes.REPORT_ON_POST_ERROR,
+    payload: []
+}
+
+
 export const PostsAction = CreatePostAction | CreatePostSuccessAction | CreatePostErrorAction
     | LoadPostAction | LoadPostSuccessAction | LoadPostErrorAction
     | LikePostAction | LikePostSuccessAction | LikePostErrorAction
@@ -222,3 +242,4 @@ export const PostsAction = CreatePostAction | CreatePostSuccessAction | CreatePo
     | CreateCommunityAction | CreateCommunitSuccessAction | CreateCommunitErrorAction
     | SearchForCommunityAction | SearchForCommunitSuccessAction | SearchForCommunitErrorAction
     | FollowCommunityAction | FollowCommunitSuccessAction | FollowCommunitErrorAction
+    | ReportAction | ReportSuccessAction | ReportErrorAction

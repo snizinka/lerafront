@@ -161,6 +161,36 @@ export default function postReducer(state = initialState, action) {
 
 
 
+        case PostActionTypes.REPORT_ON_POST:
+            return {
+                communityDetails: state.communityDetails,
+                postsList: state.postsList,
+                status: 'Processing',
+                loading: true,
+                error: null
+            }
+
+        case PostActionTypes.REPORT_ON_POST_SUCCESS:
+            return {
+                communityDetails: state.communityDetails,
+                postsList: state.postsList,
+                status: 'Your report has been sent just now',
+                loading: false,
+                error: null
+            }
+
+        case PostActionTypes.REPORT_ON_POST_ERROR:
+            return {
+                communityDetails: state.communityDetails,
+                postsList: state.postsList,
+                status: [],
+                loading: false,
+                error: null
+            }
+
+
+
+
         case PostActionTypes.LOAD_POSTS:
             return {
                 communityDetails: state.communityDetails,

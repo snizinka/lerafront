@@ -298,3 +298,31 @@ export const followCommunity = (userId, communityId) => {
         }
     }
 }
+
+
+export const reportPost = (postId, userId, report) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: PostActionTypes.REPORT_ON_POST })
+
+            const data = await fetch('http://localhost:7000/reportpost', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    userId,
+                    postId,
+                    report
+                })
+            }).then(res => res.json())
+
+            console.log(data)
+
+            dispatch({ type: PostActionTypes.REPORT_ON_POST_SUCCESS, payload: data.data })
+        } catch (err) {
+
+        }
+    }
+}
