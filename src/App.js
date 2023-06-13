@@ -18,6 +18,8 @@ import SearchForUsers from './components/SearchForUsers';
 import Profile from './components/Profile';
 import ModeratorPanel from './components/ModeratorPanel';
 import Report from './components/Report';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [socket, setSocket] = useState()
@@ -30,11 +32,17 @@ function App() {
       userId: users.user_id
     })
     setSocket(connection)
+
+    connection?.on('recieve-message', (data) => {
+      if (data.user_id !== users.user_id) {
+        toast(data.username + ": " + data.message)
+      }
+    })
   }, [])
 
   useEffect(() => {
     if (status === 'Your report has been sent just now') {
-      alert('Your report has been sent just now')
+      toast.success('Your report has been sent just now')
     }
   }, [status])
 
@@ -62,6 +70,7 @@ function App() {
           <Route path='/report/:id' element={<Report />}></Route>
         </Routes>
       </Router>
+      <ToastContainer />
     </div>
   )
 }

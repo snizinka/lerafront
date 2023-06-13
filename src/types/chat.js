@@ -20,7 +20,12 @@ export const ChatActionTypes = {
     DELETE_MESSAGE_SUCCESS: 'DELETE_MESSAGE_SUCCESS',
     DELETE_MESSAGE_ERROR: 'DELETE_MESSAGE_ERROR',
 
-    RECEIVED_MESSAGE: 'RECEIVED_MESSAGE'
+    RECEIVED_MESSAGE: 'RECEIVED_MESSAGE',
+
+    SET_IN_CHAT: 'SET_IN_CHAT',
+
+    SET_SEEN: 'SET_SEEN',
+    SET_SEEN_SUCCESS: 'SET_SEEN'
 }
 
 const GetChatsAction = {
@@ -105,9 +110,22 @@ const ReceiveMessageAction = {
     payload: []
 }
 
+const SetInChatAction = {
+    type: ChatActionTypes.SET_IN_CHAT,
+    payload: []
+}
+
+const SeenMessageSuccessAction = {
+    type: ChatActionTypes.SET_SEEN_SUCCESS,
+    payload: []
+}
+
+
 export const ChatAction = GetChatsAction | GetChatsSuccessAction | GetChatsErrorAction
 | GetChatMessagesAction | GetChatMessagesSuccessAction | GetChatMessagesErrorAction
 | ReceiveMessageAction
 | GetCurrentChatAction | GetCurrentChatSuccessAction | GetCurrentChatErrorAction
 | EditMessagesAction | EditMessagesSuccessAction | EditMessagesErrorAction
 | DeleteMessagesAction | DeleteMessagesSuccessAction | DeleteMessagesErrorAction
+| SetInChatAction
+| SeenMessageSuccessAction

@@ -97,3 +97,16 @@ export const deleteMessage = (messageId) => {
         dispatch({ type: ChatActionTypes.DELETE_MESSAGE_SUCCESS, payload: messageId })
     }
 }
+
+export const setIsInChat = (chatId) => {
+    return async (dispatch) => {
+        dispatch({ type: ChatActionTypes.SET_IN_CHAT, payload: chatId })
+    }
+}
+
+export const changeSeenState = (messageId) => {
+    return async (dispatch) => {
+        console.log(messageId)
+        dispatch({ type: ChatActionTypes.SET_SEEN_SUCCESS, payload: messageId })
+    }
+}

@@ -12,7 +12,7 @@ const Chat = ({ socket }) => {
     const [message, setMessage] = useState('')
     const { users } = useTypedSelector(state => state.users)
     const { chats, messages, currentChatData } = useTypedSelector(state => state.chat)
-    const { getPrivateChats, getPrivateChatMessages, getChatDetails, receivedMessage, editMessage, deleteMessage } = useChatActions()
+    const { getPrivateChats, getPrivateChatMessages, getChatDetails, receivedMessage, editMessage, deleteMessage, changeSeenState } = useChatActions()
 
     useEffect(() => {
         getPrivateChats(users.user_id)
@@ -36,6 +36,10 @@ const Chat = ({ socket }) => {
 
         socket?.on('removed-message', (data) => {
             deleteMessage(data)
+        })
+
+        socket?.on('seen-message', (data) => {
+            changeSeenState(data)
         })
     }, [socket])
 
@@ -64,6 +68,7 @@ const Chat = ({ socket }) => {
                     message: message,
                     username: users.username
                 }
+                console.log(messageToSend)
                 socket?.emit('send-message', messageToSend)
             }
         }
@@ -106,6 +111,9 @@ const Chat = ({ socket }) => {
                             created_at={message.created_at}
                             startEditing={startEditing}
                             removeMessage={removeMessage}
+                            is_read={message.is_read}
+                            socket={socket}
+                            user_id={message.user_id}
                         />
                     })
                 }
