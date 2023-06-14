@@ -4,7 +4,7 @@ import axios from "axios"
 import { useTypedSelector } from "../hooks/useTypedSelector"
 import Post from "./Post"
 
-const CreatePost = () => {
+const CreatePost = ({ socket }) => {
     const refInput = useRef() // document.getElementById('...')
     const { users } = useTypedSelector(state => state.users)
     const { postsList } = useTypedSelector(state => state.post)
@@ -45,14 +45,14 @@ const CreatePost = () => {
     async function loadPostImages() {
         let formData = new FormData() // [images]
 
-        for(let i = 0; i < postImages.length; i++) {
+        for (let i = 0; i < postImages.length; i++) {
             formData.append("file", postImages[i])
         }
 
         const { data } = await axios.post('http://localhost:7000/uploadfiles', formData) // [path, path ...]
         let copiedImages = []
 
-        for(let i = 0; i < data.result.length; i++) {
+        for (let i = 0; i < data.result.length; i++) {
             copiedImages.push(data.result[i].replace(/\\/g, '/'))
         }
 
@@ -154,7 +154,9 @@ const CreatePost = () => {
                             post_id={post.post_id}
                             preview={post.preview_img}
                             loadImageIfExists={loadImageIfExists}
-                            postList={post.postImages} />
+                            postList={post.postImages}
+                            socket={socket}
+                        />
                     })
                 }
             </div>

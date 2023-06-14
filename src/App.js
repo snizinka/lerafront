@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
+import { Routes, Route, BrowserRouter as Router, useNavigate } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login';
 import Posts from './components/Posts';
@@ -20,11 +20,16 @@ import ModeratorPanel from './components/ModeratorPanel';
 import Report from './components/Report';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useNotificationsActions from './hooks/useNotificationsActions'
+import Notifications from './components/Notifications';
+import Search from './components/Search';
 
 function App() {
   const [socket, setSocket] = useState()
+  const [search, setSearch] = useState('')
   const { users } = useTypedSelector(i => i.users)
   const { status } = useTypedSelector(state => state.post)
+  const { fetchNotifications } = useNotificationsActions()
 
   useEffect(() => {
     const connection = io('http://localhost:7000')
@@ -38,6 +43,8 @@ function App() {
         toast(data.username + ": " + data.message)
       }
     })
+
+    fetchNotifications(users.user_id)
   }, [])
 
   useEffect(() => {
@@ -48,13 +55,16 @@ function App() {
 
   return (
     <div className="App">
+      <input type='text' value={search} onChange={(e) => setSearch(e.target.value)} />
+      <a href={`/search/${search}`}>Search</a>
+      <Notifications />
       <Router>
         <Routes>
           <Route path='/' element={
             users?.user_id !== undefined ? <Posts /> : <Login />
           }></Route>
           <Route path='/confirmation' element={<ConfrimCode />}></Route>
-          <Route path='/posts' element={<CreatePost />}></Route>
+          <Route path='/posts' element={<CreatePost socket={socket} />}></Route>
           <Route path='/editpost/:id' element={<EditPost />}></Route>
           <Route path='/signup' element={<SignUp />}></Route>
           <Route path='/login' element={<Login />}></Route>
@@ -68,6 +78,7 @@ function App() {
           <Route path='/profile/:id' element={<Profile />}></Route>
           <Route path='/moderatorpanel' element={<ModeratorPanel />}></Route>
           <Route path='/report/:id' element={<Report />}></Route>
+          <Route path='/search/:id' element={<Search />}></Route>
         </Routes>
       </Router>
       <ToastContainer />
